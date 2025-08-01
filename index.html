@@ -562,6 +562,23 @@
         }
 
         function processarDados(linhas, separador) {
+            // Departamentos aceitos
+            const departamentosValidos = [
+                'Diretoria',
+                'Administrativo',
+                'Engenharia',
+                'Jurídico',
+                'Financeiro',
+                'Suprimentos',
+                'Recursos Humanos / Pessoal',
+                'Recursos Humanos',
+                'Pessoal',
+                'Contábil / Fiscal',
+                'Contábil',
+                'Fiscal',
+                'Tecnologia e Comunicação'
+            ];
+
             function processarLinha(linha, sep) {
                 if (sep === '\t') {
                     return linha.split('\t').map(col => col.trim().replace(/^"|"$/g, ''));
@@ -586,6 +603,26 @@
                     colunas.push(colunaAtual.trim().replace(/^"|"$/g, ''));
                     return colunas;
                 }
+            }
+
+            function validarDepartamento(departamento) {
+                if (!departamento) return false;
+                
+                const deptNormalizado = departamento.trim()
+                    .toLowerCase()
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '');
+                
+                return departamentosValidos.some(deptValido => {
+                    const validoNormalizado = deptValido
+                        .toLowerCase()
+                        .normalize('NFD')
+                        .replace(/[\u0300-\u036f]/g, '');
+                    
+                    return deptNormalizado === validoNormalizado || 
+                           deptNormalizado.includes(validoNormalizado) ||
+                           validoNormalizado.includes(deptNormalizado);
+                });
             }
 
             // Processar cabeçalho
@@ -616,6 +653,8 @@
 
             // Processar dados
             const dados = [];
+            const registrosIgnorados = [];
+            
             for (let i = 1; i < linhas.length; i++) {
                 const colunas = processarLinha(linhas[i], separador);
                 
@@ -628,10 +667,17 @@
                         Foto: colunaIndices.foto !== -1 ? (colunas[colunaIndices.foto] || '').trim() : ''
                     };
                     
-                    if (pessoa.Nome) {
+                    if (pessoa.Nome && validarDepartamento(pessoa.Departamento)) {
                         dados.push(pessoa);
+                    } else if (pessoa.Nome) {
+                        registrosIgnorados.push(`${pessoa.Nome} (${pessoa.Departamento})`);
                     }
                 }
+            }
+
+            // Log dos registros ignorados para debug
+            if (registrosIgnorados.length > 0) {
+                console.log('Registros ignorados por departamento inválido:', registrosIgnorados);
             }
 
             return dados;
