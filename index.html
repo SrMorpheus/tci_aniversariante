@@ -27,33 +27,33 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--accent-aqua) 100%);
-            min-height: 100vh;
-            padding: 20px;
+            background: transparent;
+            padding: 0;
+            margin: 0;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 25px 80px rgba(43, 61, 122, 0.15);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .webpart-container {
+            width: 100%;
+            max-width: 100%;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(43, 61, 122, 0.1);
+            border: 1px solid rgba(43, 61, 122, 0.1);
+            overflow: hidden;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
             position: relative;
         }
 
         .header h1 {
             color: var(--primary-dark);
-            font-size: 3.2rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -62,39 +62,39 @@
 
         .header p {
             color: var(--neutral-medium);
-            font-size: 1.3rem;
+            font-size: 0.95rem;
             font-weight: 400;
         }
 
         .logo-accent {
             position: absolute;
-            top: -20px;
-            right: 30px;
-            width: 80px;
-            height: 80px;
+            top: -10px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, var(--primary-medium), var(--accent-aqua));
-            border-radius: 16px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             animation: float 3s ease-in-out infinite;
-            box-shadow: 0 15px 40px rgba(74, 144, 226, 0.3);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.2);
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-6px); }
         }
 
         .month-info {
             background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
             color: var(--white);
-            padding: 35px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 12px;
             text-align: center;
-            margin-bottom: 50px;
-            box-shadow: 0 15px 40px rgba(43, 61, 122, 0.3);
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(43, 61, 122, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -116,35 +116,35 @@
         }
 
         .month-info h2 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
             position: relative;
             z-index: 1;
         }
 
         .month-info p {
             opacity: 0.9;
-            font-size: 1.3rem;
+            font-size: 0.9rem;
             position: relative;
             z-index: 1;
         }
 
         .loading {
             text-align: center;
-            padding: 60px;
+            padding: 30px;
             color: var(--neutral-medium);
-            font-size: 1.3rem;
+            font-size: 1rem;
         }
 
         .spinner {
             display: inline-block;
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(74, 144, 226, 0.2);
-            border-top: 5px solid var(--primary-medium);
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(74, 144, 226, 0.2);
+            border-top: 3px solid var(--primary-medium);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
 
         @keyframes spin {
@@ -156,27 +156,27 @@
             background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(231, 76, 60, 0.05));
             border: 1px solid rgba(231, 76, 60, 0.3);
             color: var(--error);
-            padding: 30px;
-            border-radius: 16px;
-            margin: 30px 0;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
             text-align: center;
             font-weight: 500;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
         }
 
         .aniversariantes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .aniversariante-card {
             background: linear-gradient(135deg, var(--white), rgba(248, 249, 250, 0.8));
-            border-radius: 24px;
-            padding: 35px;
-            box-shadow: 0 20px 60px rgba(43, 61, 122, 0.1);
-            transition: all 0.4s ease;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(43, 61, 122, 0.08);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.8);
@@ -188,94 +188,94 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 6px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary-dark), var(--primary-medium), var(--accent-aqua));
         }
 
         .aniversariante-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 35px 100px rgba(43, 61, 122, 0.2);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(43, 61, 122, 0.15);
         }
 
         .foto-container {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
         }
 
         .foto {
-            width: 140px;
-            height: 140px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 6px solid var(--white);
-            box-shadow: 0 12px 40px rgba(43, 61, 122, 0.15);
+            border: 4px solid var(--white);
+            box-shadow: 0 6px 20px rgba(43, 61, 122, 0.1);
             transition: all 0.3s ease;
         }
 
         .foto:hover {
             transform: scale(1.1);
-            box-shadow: 0 15px 50px rgba(43, 61, 122, 0.2);
+            box-shadow: 0 8px 25px rgba(43, 61, 122, 0.15);
         }
 
         .foto-placeholder {
-            width: 140px;
-            height: 140px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary-medium), var(--accent-aqua));
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 3.2rem;
+            font-size: 1.8rem;
             font-weight: bold;
             margin: 0 auto;
-            box-shadow: 0 12px 40px rgba(43, 61, 122, 0.15);
-            border: 6px solid var(--white);
+            box-shadow: 0 6px 20px rgba(43, 61, 122, 0.1);
+            border: 4px solid var(--white);
         }
 
         .info h3 {
             color: var(--primary-dark);
-            font-size: 1.6rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 18px;
+            margin-bottom: 10px;
             text-align: center;
         }
 
         .info p {
             color: var(--neutral-medium);
-            margin-bottom: 12px;
-            font-size: 1.15rem;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .info .data-aniversario {
             background: linear-gradient(135deg, var(--accent-aqua), var(--primary-light));
             color: var(--white);
-            padding: 18px 30px;
-            border-radius: 30px;
+            padding: 12px 20px;
+            border-radius: 20px;
             font-weight: 600;
             text-align: center;
-            margin-top: 25px;
-            box-shadow: 0 10px 30px rgba(93, 203, 220, 0.3);
-            font-size: 1.25rem;
+            margin-top: 15px;
+            box-shadow: 0 6px 15px rgba(93, 203, 220, 0.2);
+            font-size: 0.9rem;
         }
 
         .no-data {
             text-align: center;
             color: var(--neutral-medium);
-            font-size: 1.4rem;
-            padding: 120px 60px;
+            font-size: 1rem;
+            padding: 40px 20px;
             background: linear-gradient(135deg, var(--neutral-light), rgba(248, 249, 250, 0.8));
-            border-radius: 24px;
+            border-radius: 16px;
             border: 2px dashed rgba(74, 144, 226, 0.3);
         }
 
         .no-data h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
             color: var(--primary-medium);
         }
 
@@ -283,196 +283,115 @@
             background: linear-gradient(135deg, var(--primary-medium), var(--primary-dark));
             color: var(--white);
             border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
-            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.2);
+            margin-top: 15px;
         }
 
         .reload-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(74, 144, 226, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
         }
 
-        /* Responsividade Aprimorada */
-        @media (max-width: 1200px) {
-            .aniversariantes-grid {
-                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-                gap: 25px;
-            }
-            
-            .container {
-                max-width: 1200px;
-                padding: 35px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
+        /* Responsividade específica para Web Parts */
+        @media (max-width: 800px) {
+            .webpart-container {
                 padding: 15px;
-            }
-            
-            .container {
-                padding: 25px;
-                margin: 0;
-                border-radius: 20px;
-            }
-            
-            .header {
-                margin-bottom: 35px;
-            }
-            
-            .header h1 {
-                font-size: 2.2rem;
-                margin-bottom: 12px;
-            }
-            
-            .header p {
-                font-size: 1.1rem;
-            }
-            
-            .logo-accent {
-                position: static;
-                margin: 0 auto 20px;
-                width: 60px;
-                height: 60px;
-                font-size: 2rem;
-            }
-            
-            .month-info {
-                padding: 25px;
-                margin-bottom: 35px;
-            }
-            
-            .month-info h2 {
-                font-size: 2rem;
-                margin-bottom: 8px;
-            }
-            
-            .month-info p {
-                font-size: 1.1rem;
             }
             
             .aniversariantes-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-                margin-top: 30px;
-            }
-            
-            .aniversariante-card {
-                padding: 25px;
-            }
-            
-            .foto, .foto-placeholder {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .foto-placeholder {
-                font-size: 2.8rem;
-            }
-            
-            .info h3 {
-                font-size: 1.4rem;
-                margin-bottom: 15px;
-            }
-            
-            .info p {
-                font-size: 1rem;
-                gap: 8px;
-            }
-            
-            .info .data-aniversario {
-                padding: 15px 25px;
-                font-size: 1.1rem;
-                margin-top: 20px;
-            }
-            
-            .no-data {
-                padding: 80px 30px;
-                font-size: 1.2rem;
-            }
-            
-            .no-data h3 {
-                font-size: 1.6rem;
-                margin-bottom: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px;
-                border-radius: 16px;
+                gap: 12px;
             }
             
             .header h1 {
-                font-size: 1.9rem;
-            }
-            
-            .month-info {
-                padding: 20px;
-            }
-            
-            .month-info h2 {
-                font-size: 1.7rem;
-            }
-            
-            .month-info p {
-                font-size: 1rem;
-            }
-            
-            .aniversariante-card {
-                padding: 20px;
-                border-radius: 20px;
-            }
-            
-            .foto, .foto-placeholder {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .foto-placeholder {
-                font-size: 2.4rem;
-            }
-            
-            .info h3 {
-                font-size: 1.3rem;
-            }
-            
-            .info p {
-                font-size: 0.95rem;
-            }
-            
-            .info .data-aniversario {
-                padding: 12px 20px;
-                font-size: 1rem;
-            }
-            
-            .no-data {
-                padding: 60px 20px;
-                font-size: 1.1rem;
-            }
-            
-            .no-data h3 {
                 font-size: 1.5rem;
             }
             
-            .reload-btn {
-                padding: 12px 25px;
-                font-size: 1rem;
+            .logo-accent {
+                position: static;
+                margin: 0 auto 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
             }
+        }
+
+        @media (max-width: 500px) {
+            .webpart-container {
+                padding: 12px;
+                border-radius: 8px;
+            }
+            
+            .aniversariante-card {
+                padding: 15px;
+                border-radius: 12px;
+            }
+            
+            .foto, .foto-placeholder {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .foto-placeholder {
+                font-size: 1.6rem;
+            }
+            
+            .info h3 {
+                font-size: 1.1rem;
+            }
+            
+            .info p {
+                font-size: 0.8rem;
+            }
+            
+            .info .data-aniversario {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Estilos específicos para integração SharePoint */
+        .ms-webpart-chrome-title {
+            display: none !important;
+        }
+
+        .webpart-container {
+            min-height: 200px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        /* Scrollbar personalizada */
+        .webpart-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .webpart-container::-webkit-scrollbar-track {
+            background: rgba(248, 249, 250, 0.5);
+            border-radius: 3px;
+        }
+
+        .webpart-container::-webkit-scrollbar-thumb {
+            background: rgba(74, 144, 226, 0.3);
+            border-radius: 3px;
+        }
+
+        .webpart-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(74, 144, 226, 0.5);
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="webpart-container">
         <div class="header">
             <div class="logo-accent">🎂</div>
-            <h1>🎉 Aniversariantes do Mês</h1>
+            <h1>🎉 Aniversariantes</h1>
             <p>Celebrando nossos colaboradores</p>
         </div>
 
@@ -489,7 +408,7 @@
         <div id="error" class="error" style="display: none;">
             <h3>❌ Erro ao Carregar Dados</h3>
             <p id="error-message"></p>
-            <button class="reload-btn" onclick="window.location.reload()">🔄 Recarregar Página</button>
+            <button class="reload-btn" onclick="window.location.reload()">🔄 Recarregar</button>
         </div>
 
         <div id="aniversariantes" class="aniversariantes-grid"></div>
@@ -594,8 +513,8 @@
             if (aniversariantesMes.length === 0) {
                 container.innerHTML = `
                     <div class="no-data">
-                        <h3>🎭 Nenhum aniversariante este mês</h3>
-                        <p>Não há aniversários programados para ${mesesNomes[obterMesAtual() - 1]}.</p>
+                        <h3>🎭 Nenhum aniversariante</h3>
+                        <p>Não há aniversários em ${mesesNomes[obterMesAtual() - 1]}.</p>
                     </div>
                 `;
                 return;
@@ -764,13 +683,23 @@
             }
         }
 
-        // Inicialização
-        window.addEventListener('load', function() {
-            console.log('Sistema de Aniversariantes TCI iniciado');
+        // Inicialização otimizada para SharePoint
+        function inicializar() {
+            console.log('Sistema de Aniversariantes TCI Web Part iniciado');
             setTimeout(() => {
                 carregarDados();
-            }, 1000);
-        });
+            }, 500);
+        }
+
+        // Suporte para diferentes métodos de carregamento
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', inicializar);
+        } else {
+            inicializar();
+        }
+
+        // Fallback para SharePoint
+        setTimeout(inicializar, 1000);
     </script>
 </body>
 </html>
