@@ -912,13 +912,27 @@
             }
         }
 
+      // Função para redirecionar para a página de todos os aniversariantes
         function redirecionarParaTodosAniversariantes() {
-            // Você pode personalizar esta função para redirecionar para uma página específica
-            // Por exemplo:
-            // window.open('/sites/seu-site/SitePages/TodosAniversariantes.aspx', '_blank');
+            // Verificar se o arquivo todos-aniversariantes.html existe
+            const urlDestino = 'todos_aniversariantes.html';
             
-            // Ou criar um modal/popup com todos os aniversariantes
-            mostrarTodosAniversariantes();
+            // Salvar dados no sessionStorage para a próxima página (se disponível)
+            try {
+                if (typeof(Storage) !== "undefined" && dadosCompletos.length > 0) {
+                    sessionStorage.setItem('dadosAniversariantes', JSON.stringify(dadosCompletos));
+                }
+            } catch (e) {
+                console.warn('SessionStorage não disponível:', e);
+            }
+            
+            // Tentar abrir a nova página
+            try {
+                window.open(urlDestino, '_blank');
+            } catch (error) {
+                // Fallback: redirecionar na mesma aba
+                window.location.href = urlDestino;
+            }
         }
 
         function mostrarTodosAniversariantes() {
