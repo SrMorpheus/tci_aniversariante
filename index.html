@@ -30,71 +30,92 @@
             background: transparent;
             padding: 0;
             margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Estilos específicos para integração SharePoint */
+        .ms-webpart-chrome-title {
+            display: none !important;
+        }
+
+        .ms-webpartzone-cell {
+            vertical-align: top !important;
+        }
+
+        .ms-rte-layoutszone-inner {
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
         .webpart-container {
-            width: 100%;
-            max-width: 100%;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 280px;
             background: var(--white);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(43, 61, 122, 0.1);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0;
+            box-shadow: 0 2px 8px rgba(43, 61, 122, 0.08);
             border: 1px solid rgba(43, 61, 122, 0.1);
             overflow: hidden;
+            position: relative;
+            min-height: 200px;
+            max-height: none;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             position: relative;
         }
 
         .header h1 {
             color: var(--primary-dark);
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            line-height: 1.2;
         }
 
         .header p {
             color: var(--neutral-medium);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 400;
         }
 
         .logo-accent {
             position: absolute;
-            top: -10px;
-            right: 15px;
-            width: 50px;
-            height: 50px;
+            top: -8px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, var(--primary-medium), var(--accent-aqua));
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             animation: float 3s ease-in-out infinite;
-            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.2);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
+            50% { transform: translateY(-4px); }
         }
 
         .month-info {
             background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
             color: var(--white);
-            padding: 20px;
-            border-radius: 12px;
+            padding: 16px;
+            border-radius: 10px;
             text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(43, 61, 122, 0.2);
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(43, 61, 122, 0.15);
             position: relative;
             overflow: hidden;
         }
@@ -106,7 +127,7 @@
             right: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
             animation: shimmer 4s ease-in-out infinite;
         }
 
@@ -116,35 +137,35 @@
         }
 
         .month-info h2 {
-            font-size: 1.4rem;
-            margin-bottom: 5px;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
             position: relative;
             z-index: 1;
         }
 
         .month-info p {
             opacity: 0.9;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             position: relative;
             z-index: 1;
         }
 
         .loading {
             text-align: center;
-            padding: 30px;
+            padding: 24px;
             color: var(--neutral-medium);
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .spinner {
             display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(74, 144, 226, 0.2);
-            border-top: 3px solid var(--primary-medium);
+            width: 32px;
+            height: 32px;
+            border: 2px solid rgba(74, 144, 226, 0.2);
+            border-top: 2px solid var(--primary-medium);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         @keyframes spin {
@@ -156,26 +177,26 @@
             background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(231, 76, 60, 0.05));
             border: 1px solid rgba(231, 76, 60, 0.3);
             color: var(--error);
-            padding: 20px;
-            border-radius: 12px;
-            margin: 15px 0;
+            padding: 16px;
+            border-radius: 10px;
+            margin: 12px 0;
             text-align: center;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .aniversariantes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
         }
 
         .aniversariante-card {
             background: linear-gradient(135deg, var(--white), rgba(248, 249, 250, 0.8));
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 8px 24px rgba(43, 61, 122, 0.08);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 16px rgba(43, 61, 122, 0.06);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -188,94 +209,96 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, var(--primary-dark), var(--primary-medium), var(--accent-aqua));
         }
 
         .aniversariante-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 16px 40px rgba(43, 61, 122, 0.15);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 8px 24px rgba(43, 61, 122, 0.12);
         }
 
         .foto-container {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .foto {
-            width: 80px;
-            height: 80px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--white);
-            box-shadow: 0 6px 20px rgba(43, 61, 122, 0.1);
+            border: 3px solid var(--white);
+            box-shadow: 0 4px 12px rgba(43, 61, 122, 0.08);
             transition: all 0.3s ease;
         }
 
         .foto:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(43, 61, 122, 0.15);
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(43, 61, 122, 0.12);
         }
 
         .foto-placeholder {
-            width: 80px;
-            height: 80px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary-medium), var(--accent-aqua));
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: bold;
             margin: 0 auto;
-            box-shadow: 0 6px 20px rgba(43, 61, 122, 0.1);
-            border: 4px solid var(--white);
+            box-shadow: 0 4px 12px rgba(43, 61, 122, 0.08);
+            border: 3px solid var(--white);
         }
 
         .info h3 {
             color: var(--primary-dark);
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: center;
+            line-height: 1.2;
         }
 
         .info p {
             color: var(--neutral-medium);
-            margin-bottom: 8px;
-            font-size: 0.85rem;
+            margin-bottom: 6px;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .info .data-aniversario {
             background: linear-gradient(135deg, var(--accent-aqua), var(--primary-light));
             color: var(--white);
-            padding: 12px 20px;
-            border-radius: 20px;
+            padding: 8px 16px;
+            border-radius: 16px;
             font-weight: 600;
             text-align: center;
-            margin-top: 15px;
-            box-shadow: 0 6px 15px rgba(93, 203, 220, 0.2);
-            font-size: 0.9rem;
+            margin-top: 12px;
+            box-shadow: 0 4px 10px rgba(93, 203, 220, 0.15);
+            font-size: 0.8rem;
         }
 
         .no-data {
             text-align: center;
             color: var(--neutral-medium);
-            font-size: 1rem;
-            padding: 40px 20px;
+            font-size: 0.9rem;
+            padding: 32px 16px;
             background: linear-gradient(135deg, var(--neutral-light), rgba(248, 249, 250, 0.8));
-            border-radius: 16px;
-            border: 2px dashed rgba(74, 144, 226, 0.3);
+            border-radius: 12px;
+            border: 2px dashed rgba(74, 144, 226, 0.2);
+            grid-column: 1 / -1;
         }
 
         .no-data h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
             color: var(--primary-medium);
         }
 
@@ -283,153 +306,207 @@
             background: linear-gradient(135deg, var(--primary-medium), var(--primary-dark));
             color: var(--white);
             border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 16px;
+            font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.2);
-            margin-top: 15px;
+            box-shadow: 0 3px 10px rgba(74, 144, 226, 0.15);
+            margin-top: 12px;
         }
 
         .reload-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
         }
 
         /* Botão Saiba Mais */
         .saiba-mais-container {
             text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid rgba(74, 144, 226, 0.1);
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(74, 144, 226, 0.1);
         }
 
         .saiba-mais-btn {
             background: linear-gradient(135deg, var(--accent-aqua), var(--primary-light));
             color: var(--white);
             border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(93, 203, 220, 0.3);
+            box-shadow: 0 4px 12px rgba(93, 203, 220, 0.2);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .saiba-mais-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 30px rgba(93, 203, 220, 0.4);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 18px rgba(93, 203, 220, 0.3);
         }
 
         .contador-aniversariantes {
             background: rgba(93, 203, 220, 0.1);
             color: var(--primary-dark);
-            padding: 10px 15px;
-            border-radius: 15px;
-            font-size: 0.9rem;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             display: inline-block;
         }
 
-        /* Responsividade específica para Web Parts */
-        @media (max-width: 800px) {
+        /* Responsividade específica para Web Parts do SharePoint */
+        @media (max-width: 768px) {
             .webpart-container {
-                padding: 15px;
+                padding: 12px;
+                border-radius: 6px;
             }
             
             .aniversariantes-grid {
                 grid-template-columns: 1fr;
-                gap: 12px;
+                gap: 10px;
             }
             
             .header h1 {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
             
             .logo-accent {
                 position: static;
-                margin: 0 auto 15px;
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
+                margin: 0 auto 12px;
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+            
+            .month-info {
+                padding: 12px;
             }
         }
 
-        @media (max-width: 500px) {
+        /* Ajustes para Web Parts em colunas estreitas */
+        @media (max-width: 480px) {
             .webpart-container {
+                padding: 10px;
+                border-radius: 4px;
+                min-width: 250px;
+            }
+            
+            .aniversariante-card {
                 padding: 12px;
                 border-radius: 8px;
             }
             
-            .aniversariante-card {
-                padding: 15px;
-                border-radius: 12px;
-            }
-            
             .foto, .foto-placeholder {
-                width: 70px;
-                height: 70px;
+                width: 56px;
+                height: 56px;
             }
             
             .foto-placeholder {
-                font-size: 1.6rem;
+                font-size: 1.2rem;
             }
             
             .info h3 {
-                font-size: 1.1rem;
+                font-size: 0.95rem;
             }
             
             .info p {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
             }
             
             .info .data-aniversario {
-                padding: 10px 15px;
-                font-size: 0.85rem;
+                padding: 6px 12px;
+                font-size: 0.75rem;
             }
 
             .saiba-mais-btn {
-                padding: 12px 25px;
-                font-size: 0.9rem;
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+
+            .header h1 {
+                font-size: 1.1rem;
+            }
+
+            .month-info h2 {
+                font-size: 1.1rem;
+            }
+
+            .month-info p {
+                font-size: 0.75rem;
             }
         }
 
-        /* Estilos específicos para integração SharePoint */
+        /* Ajustes específicos para SharePoint */
+        .ms-webpart-chrome {
+            border: none !important;
+        }
+
         .ms-webpart-chrome-title {
             display: none !important;
         }
 
-        .webpart-container {
-            min-height: 200px;
-            max-height: 600px;
-            overflow-y: auto;
+        /* Para Web Parts em modo de edição */
+        .ms-rte-wpbox {
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
-        /* Scrollbar personalizada */
+        /* Garantir que não haja overflow horizontal */
+        .webpart-container,
+        .aniversariantes-grid,
+        .aniversariante-card {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Ajuste para containers flexíveis */
+        .aniversariantes-grid {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .aniversariante-card {
+            min-width: 0; /* Permite que o card encolha */
+            width: 100%;
+        }
+
+        /* Scrollbar personalizada para containers pequenos */
         .webpart-container::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
 
         .webpart-container::-webkit-scrollbar-track {
-            background: rgba(248, 249, 250, 0.5);
-            border-radius: 3px;
+            background: rgba(248, 249, 250, 0.3);
+            border-radius: 2px;
         }
 
         .webpart-container::-webkit-scrollbar-thumb {
-            background: rgba(74, 144, 226, 0.3);
-            border-radius: 3px;
+            background: rgba(74, 144, 226, 0.2);
+            border-radius: 2px;
         }
 
         .webpart-container::-webkit-scrollbar-thumb:hover {
-            background: rgba(74, 144, 226, 0.5);
+            background: rgba(74, 144, 226, 0.3);
+        }
+
+        /* Ajustes para texto longo em cards pequenos */
+        .info h3 {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .info p {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
     </style>
 </head>
@@ -603,7 +680,7 @@
                 const restantes = aniversariantesMes.length - 3;
                 //contadorElement.textContent = `+${restantes} aniversariante(s) este mês`;
                 
-                contadorContainer.style.display = 'block';
+                //contadorContainer.style.display = 'block';
                 saibaMaisContainer.style.display = 'block';
             } else {
                 // Mostrar botão mesmo que não tenha mais de 3, para ver todos os meses
@@ -777,10 +854,17 @@
             }
 
             if (dados.length === 0) {
-                throw new Error('Nenhum registro válido encontrado no arquivo.');
+                let mensagemErro = 'Nenhum registro válido encontrado.';
+                if (registrosIgnorados.length > 0) {
+                    mensagemErro += ' Problemas encontrados:\n' + registrosIgnorados.slice(0, 5).join('\n');
+                    if (registrosIgnorados.length > 5) {
+                        mensagemErro += `\n... e mais ${registrosIgnorados.length - 5} problemas.`;
+                    }
+                }
+                throw new Error(mensagemErro);
             }
 
-            // Log de registros ignorados para debug
+            // Log de registros ignorados (opcional, para debug)
             if (registrosIgnorados.length > 0) {
                 console.warn('Registros ignorados:', registrosIgnorados);
             }
@@ -788,152 +872,228 @@
             return dados;
         }
 
-        async function carregarArquivo(nomeArquivo) {
-            try {
-                const response = await fetch(nomeArquivo);
-                
-                if (!response.ok) {
-                    throw new Error(`Arquivo não encontrado: ${nomeArquivo}`);
-                }
-                
-                const text = await response.text();
-                return processarCSV(text);
-            } catch (error) {
-                throw new Error(`Erro ao carregar ${nomeArquivo}: ${error.message}`);
-            }
-        }
-
         async function carregarDados() {
-            let ultimoErro = null;
-            
-            // Tentar carregar cada arquivo da lista
-            for (const nomeArquivo of nomesPlanilha) {
-                try {
-                    console.log(`Tentando carregar: ${nomeArquivo}`);
-                    dadosCompletos = await carregarArquivo(nomeArquivo);
-                    console.log(`Sucesso ao carregar ${nomeArquivo}:`, dadosCompletos.length, 'registros');
-                    
-                    // Esconder loading e mostrar dados
-                    document.getElementById('loading').style.display = 'none';
-                    atualizarInfoMes();
-                    exibirAniversariantes();
-                    return; // Sucesso, sair da função
-                    
-                } catch (error) {
-                    console.warn(`Falha ao carregar ${nomeArquivo}:`, error.message);
-                    ultimoErro = error;
-                    continue; // Tentar próximo arquivo
-                }
-            }
-            
-            // Se chegou aqui, nenhum arquivo foi carregado com sucesso
-            console.error('Nenhum arquivo de dados pôde ser carregado');
-            mostrarErro(
-                ultimoErro ? 
-                `Não foi possível carregar os dados. Último erro: ${ultimoErro.message}` :
-                'Nenhum arquivo de dados encontrado. Verifique se existe um dos seguintes arquivos: ' + nomesPlanilha.join(', ')
-            );
-        }
-
-        // Função para criar dados de exemplo caso não consiga carregar arquivo
-        function criarDadosExemplo() {
-            const mesAtual = obterMesAtual();
-            
-            return [
-                {
-                    Nome: 'Maria Silva',
-                    Departamento: 'Recursos Humanos',
-                    Cargo: 'Analista de RH',
-                    Data: `15/${mesAtual}/1990`,
-                    Foto: ''
-                },
-                {
-                    Nome: 'João Santos',
-                    Departamento: 'Tecnologia e Comunicação',
-                    Cargo: 'Desenvolvedor',
-                    Data: `22/${mesAtual}/1985`,
-                    Foto: ''
-                },
-                {
-                    Nome: 'Ana Costa',
-                    Departamento: 'Financeiro',
-                    Cargo: 'Analista Financeiro',
-                    Data: `08/${mesAtual}/1992`,
-                    Foto: ''
-                }
-            ];
-        }
-
-        async function carregarDadosComFallback() {
             try {
-                await carregarDados();
-            } catch (error) {
-                console.warn('Carregando dados de exemplo devido ao erro:', error);
-                
-                // Usar dados de exemplo
-                dadosCompletos = criarDadosExemplo();
-                
-                // Esconder loading e mostrar dados
+                let dadosCarregados = false;
+
+                // Tentar carregar cada arquivo da lista
+                for (const nomeArquivo of nomesPlanilha) {
+                    try {
+                        const response = await fetch(nomeArquivo);
+                        
+                        if (response.ok) {
+                            const csvText = await response.text();
+                            
+                            if (csvText && csvText.trim().length > 0) {
+                                dadosCompletos = processarCSV(csvText);
+                                dadosCarregados = true;
+                                console.log(`Dados carregados com sucesso de: ${nomeArquivo}`);
+                                break;
+                            }
+                        }
+                    } catch (error) {
+                        console.warn(`Erro ao tentar carregar ${nomeArquivo}:`, error.message);
+                        continue;
+                    }
+                }
+
+                if (!dadosCarregados) {
+                    throw new Error(`Nenhum arquivo de dados encontrado. Procurei pelos arquivos: ${nomesPlanilha.join(', ')}`);
+                }
+
+                // Atualizar interface
                 document.getElementById('loading').style.display = 'none';
                 atualizarInfoMes();
                 exibirAniversariantes();
-                
-                // Mostrar aviso sobre dados de exemplo
-                const avisoExemplo = document.createElement('div');
-                avisoExemplo.className = 'error';
-                avisoExemplo.style.background = 'linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05))';
-                avisoExemplo.style.borderColor = 'rgba(255, 193, 7, 0.3)';
-                avisoExemplo.style.color = '#856404';
-                avisoExemplo.innerHTML = `
-                    <h3>⚠️ Dados de Exemplo</h3>
-                    <p>Não foi possível carregar o arquivo de dados. Exibindo dados de exemplo.</p>
-                `;
-                
-                const monthInfo = document.getElementById('month-info');
-                monthInfo.parentNode.insertBefore(avisoExemplo, monthInfo.nextSibling);
-            }
-        }
 
-        // Função para redirecionar para a página de todos os aniversariantes
-        function redirecionarParaTodosAniversariantes() {
-            // Verificar se o arquivo todos-aniversariantes.html existe
-            const urlDestino = 'todos_aniversariantes.html';
-            
-            // Salvar dados no sessionStorage para a próxima página (se disponível)
-            try {
-                if (typeof(Storage) !== "undefined" && dadosCompletos.length > 0) {
-                    sessionStorage.setItem('dadosAniversariantes', JSON.stringify(dadosCompletos));
-                }
-            } catch (e) {
-                console.warn('SessionStorage não disponível:', e);
-            }
-            
-            // Tentar abrir a nova página
-            try {
-                window.open(urlDestino, '_blank');
             } catch (error) {
-                // Fallback: redirecionar na mesma aba
-                window.location.href = urlDestino;
+                console.error('Erro ao carregar dados:', error);
+                mostrarErro(error.message);
             }
         }
 
-        // Função para lidar com erros de carregamento de imagem
-        function handleImageError(img) {
-            img.style.display = 'none';
-            const placeholder = img.nextElementSibling;
-            if (placeholder && placeholder.classList.contains('foto-placeholder')) {
-                placeholder.style.display = 'flex';
-            }
+        function redirecionarParaTodosAniversariantes() {
+            // Você pode personalizar esta função para redirecionar para uma página específica
+            // Por exemplo:
+            // window.open('/sites/seu-site/SitePages/TodosAniversariantes.aspx', '_blank');
+            
+            // Ou criar um modal/popup com todos os aniversariantes
+            mostrarTodosAniversariantes();
         }
 
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Página carregada, iniciando carregamento de dados...');
-            carregarDadosComFallback();
+        function mostrarTodosAniversariantes() {
+            // Criar um modal simples para mostrar todos os aniversariantes
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                padding: 20px;
+                box-sizing: border-box;
+            `;
+
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                border-radius: 12px;
+                padding: 20px;
+                max-width: 900px;
+                max-height: 80vh;
+                overflow-y: auto;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                position: relative;
+            `;
+
+            // Agrupar por mês
+            const aniversariantesPorMes = {};
+            dadosCompletos.forEach(pessoa => {
+                if (pessoa.Data) {
+                    const partes = pessoa.Data.split('/');
+                    if (partes.length >= 2) {
+                        const mes = parseInt(partes[1]);
+                        if (mes >= 1 && mes <= 12) {
+                            if (!aniversariantesPorMes[mes]) {
+                                aniversariantesPorMes[mes] = [];
+                            }
+                            aniversariantesPorMes[mes].push(pessoa);
+                        }
+                    }
+                }
+            });
+
+            let conteudo = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px;">
+                    <h2 style="margin: 0; color: var(--primary-dark); font-size: 1.5rem;">📅 Todos os Aniversariantes</h2>
+                    <button onclick="this.closest('div[style*=\"position: fixed\"]').remove()" style="
+                        background: var(--error);
+                        color: white;
+                        border: none;
+                        border-radius: 50%;
+                        width: 30px;
+                        height: 30px;
+                        cursor: pointer;
+                        font-size: 1.2rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">×</button>
+                </div>
+            `;
+
+            // Mostrar aniversariantes por mês
+            for (let mes = 1; mes <= 12; mes++) {
+                if (aniversariantesPorMes[mes] && aniversariantesPorMes[mes].length > 0) {
+                    // Ordenar por dia
+                    aniversariantesPorMes[mes].sort((a, b) => {
+                        const diaA = parseInt(a.Data.split('/')[0]);
+                        const diaB = parseInt(b.Data.split('/')[0]);
+                        return diaA - diaB;
+                    });
+
+                    conteudo += `
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="color: var(--primary-medium); font-size: 1.2rem; margin-bottom: 12px; padding: 8px 0; border-bottom: 1px solid #e0e0e0;">
+                                ${mesesNomes[mes - 1]} (${aniversariantesPorMes[mes].length} aniversariante${aniversariantesPorMes[mes].length > 1 ? 's' : ''})
+                            </h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px;">
+                    `;
+
+                    aniversariantesPorMes[mes].forEach(pessoa => {
+                        const iniciais = obterIniciais(pessoa.Nome);
+                        const dataFormatada = formatarData(pessoa.Data);
+
+                        conteudo += `
+                            <div style="
+                                background: linear-gradient(135deg, white, rgba(248, 249, 250, 0.8));
+                                border-radius: 8px;
+                                padding: 12px;
+                                box-shadow: 0 2px 8px rgba(43, 61, 122, 0.06);
+                                border: 1px solid rgba(255, 255, 255, 0.8);
+                                text-align: center;
+                            ">
+                                <div style="
+                                    width: 50px;
+                                    height: 50px;
+                                    border-radius: 50%;
+                                    background: linear-gradient(135deg, var(--primary-medium), var(--accent-aqua));
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: white;
+                                    font-size: 1.1rem;
+                                    font-weight: bold;
+                                    margin: 0 auto 8px;
+                                    border: 2px solid white;
+                                    box-shadow: 0 2px 8px rgba(43, 61, 122, 0.08);
+                                ">${iniciais}</div>
+                                <h4 style="margin: 0 0 4px 0; color: var(--primary-dark); font-size: 0.9rem; font-weight: 600;">${pessoa.Nome}</h4>
+                                <p style="margin: 2px 0; color: var(--neutral-medium); font-size: 0.75rem;">🏢 ${pessoa.Departamento}</p>
+                                <p style="margin: 2px 0; color: var(--neutral-medium); font-size: 0.75rem;">💼 ${pessoa.Cargo}</p>
+                                <div style="
+                                    background: linear-gradient(135deg, var(--accent-aqua), var(--primary-light));
+                                    color: white;
+                                    padding: 4px 8px;
+                                    border-radius: 12px;
+                                    font-weight: 600;
+                                    font-size: 0.7rem;
+                                    margin-top: 6px;
+                                    display: inline-block;
+                                ">🎂 ${dataFormatada}</div>
+                            </div>
+                        `;
+                    });
+
+                    conteudo += `
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            if (Object.keys(aniversariantesPorMes).length === 0) {
+                conteudo += `
+                    <div style="text-align: center; padding: 40px; color: var(--neutral-medium);">
+                        <h3>🎭 Nenhum aniversariante cadastrado</h3>
+                        <p>Não há dados de aniversários disponíveis.</p>
+                    </div>
+                `;
+            }
+
+            modalContent.innerHTML = conteudo;
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+
+            // Fechar modal ao clicar fora
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            atualizarInfoMes();
+            carregarDados();
         });
 
-        // Atualizar informações do mês imediatamente
-        atualizarInfoMes();
+        // Para compatibilidade com SharePoint, também inicializar imediatamente
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                atualizarInfoMes();
+                carregarDados();
+            });
+        } else {
+            atualizarInfoMes();
+            carregarDados();
+        }
     </script>
 </body>
 </html>
