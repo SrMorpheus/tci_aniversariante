@@ -298,6 +298,47 @@
             box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
         }
 
+        /* Botão Saiba Mais */
+        .saiba-mais-container {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(74, 144, 226, 0.1);
+        }
+
+        .saiba-mais-btn {
+            background: linear-gradient(135deg, var(--accent-aqua), var(--primary-light));
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(93, 203, 220, 0.3);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .saiba-mais-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(93, 203, 220, 0.4);
+        }
+
+        .contador-aniversariantes {
+            background: rgba(93, 203, 220, 0.1);
+            color: var(--primary-dark);
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
         /* Responsividade específica para Web Parts */
         @media (max-width: 800px) {
             .webpart-container {
@@ -353,6 +394,11 @@
             .info .data-aniversario {
                 padding: 10px 15px;
                 font-size: 0.85rem;
+            }
+
+            .saiba-mais-btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
             }
         }
 
@@ -411,7 +457,18 @@
             <button class="reload-btn" onclick="window.location.reload()">🔄 Recarregar</button>
         </div>
 
+        <div id="contador-container" class="saiba-mais-container" style="display: none;">
+            <div class="contador-aniversariantes" id="contador-aniversariantes"></div>
+        </div>
+
         <div id="aniversariantes" class="aniversariantes-grid"></div>
+
+        <div id="saiba-mais-container" class="saiba-mais-container" style="display: none;">
+            <button class="saiba-mais-btn" onclick="redirecionarParaTodosAniversariantes()">
+                📅 Ver Todos os Aniversariantes
+                <span>→</span>
+            </button>
+        </div>
     </div>
 
     <script>
@@ -517,6 +574,8 @@
                         <p>Não há aniversários em ${mesesNomes[obterMesAtual() - 1]}.</p>
                     </div>
                 `;
+                // Ainda mostrar o botão mesmo sem aniversariantes no mês atual
+                document.getElementById('saiba-mais-container').style.display = 'block';
                 return;
             }
 
@@ -527,10 +586,29 @@
                 return diaA - diaB;
             });
 
-            aniversariantesMes.forEach(pessoa => {
+            // Mostrar apenas os primeiros 3 aniversariantes
+            const aniversariantesLimitados = aniversariantesMes.slice(0, 3);
+
+            aniversariantesLimitados.forEach(pessoa => {
                 const card = criarCardAniversariante(pessoa);
                 container.appendChild(card);
             });
+
+            // Mostrar contador e botão "Saiba Mais" se houver mais de 3 aniversariantes
+            if (aniversariantesMes.length > 3) {
+                const contadorContainer = document.getElementById('contador-container');
+                const contadorElement = document.getElementById('contador-aniversariantes');
+                const saibaMaisContainer = document.getElementById('saiba-mais-container');
+                
+                const restantes = aniversariantesMes.length - 3;
+                //contadorElement.textContent = `+${restantes} aniversariante(s) este mês`;
+                
+                contadorContainer.style.display = 'block';
+                saibaMaisContainer.style.display = 'block';
+            } else {
+                // Mostrar botão mesmo que não tenha mais de 3, para ver todos os meses
+                document.getElementById('saiba-mais-container').style.display = 'block';
+            }
         }
 
         function mostrarErro(mensagem) {
@@ -666,86 +744,196 @@
                         Data: (colunas[colunaIndices.data] || '').trim(),
                         Foto: colunaIndices.foto !== -1 ? (colunas[colunaIndices.foto] || '').trim() : ''
                     };
-                    
-                    if (pessoa.Nome && validarDepartamento(pessoa.Departamento)) {
-                        dados.push(pessoa);
-                    } else if (pessoa.Nome) {
-                        registrosIgnorados.push(`${pessoa.Nome} (${pessoa.Departamento})`);
+
+                    // Validar dados obrigatórios
+                    if (!pessoa.Nome || !pessoa.Departamento || !pessoa.Cargo || !pessoa.Data) {
+                        registrosIgnorados.push(`Linha ${i + 1}: Dados incompletos`);
+                        continue;
                     }
+
+                    // Validar departamento
+                    if (!validarDepartamento(pessoa.Departamento)) {
+                        registrosIgnorados.push(`Linha ${i + 1}: Departamento inválido - ${pessoa.Departamento}`);
+                        continue;
+                    }
+
+                    // Validar formato da data
+                    const partesData = pessoa.Data.split('/');
+                    if (partesData.length < 2 || partesData.length > 3) {
+                        registrosIgnorados.push(`Linha ${i + 1}: Formato de data inválido - ${pessoa.Data}`);
+                        continue;
+                    }
+
+                    const dia = parseInt(partesData[0]);
+                    const mes = parseInt(partesData[1]);
+
+                    if (isNaN(dia) || isNaN(mes) || dia < 1 || dia > 31 || mes < 1 || mes > 12) {
+                        registrosIgnorados.push(`Linha ${i + 1}: Data inválida - ${pessoa.Data}`);
+                        continue;
+                    }
+
+                    dados.push(pessoa);
                 }
             }
 
-            // Log dos registros ignorados para debug
+            if (dados.length === 0) {
+                throw new Error('Nenhum registro válido encontrado no arquivo.');
+            }
+
+            // Log de registros ignorados para debug
             if (registrosIgnorados.length > 0) {
-                console.log('Registros ignorados por departamento inválido:', registrosIgnorados);
+                console.warn('Registros ignorados:', registrosIgnorados);
             }
 
             return dados;
         }
 
-        async function carregarDados() {
+        async function carregarArquivo(nomeArquivo) {
             try {
-                let arquivoEncontrado = null;
-                let csvContent = null;
+                const response = await fetch(nomeArquivo);
                 
-                // Tentar carregar cada arquivo da lista
-                for (const nomeArquivo of nomesPlanilha) {
-                    try {
-                        const response = await fetch(nomeArquivo);
-                        
-                        if (response.ok) {
-                            csvContent = await response.text();
-                            
-                            if (csvContent && csvContent.trim().length > 0) {
-                                arquivoEncontrado = nomeArquivo;
-                                break;
-                            }
-                        }
-                    } catch (error) {
-                        continue;
-                    }
+                if (!response.ok) {
+                    throw new Error(`Arquivo não encontrado: ${nomeArquivo}`);
                 }
                 
-                if (!arquivoEncontrado) {
-                    throw new Error(`Nenhuma planilha encontrada. Certifique-se de que existe um arquivo CSV na pasta com um dos nomes: ${nomesPlanilha.join(', ')}`);
-                }
-                
-                dadosCompletos = processarCSV(csvContent);
-
-                if (dadosCompletos.length === 0) {
-                    throw new Error('Nenhum registro válido foi encontrado na planilha.');
-                }
-
-                // Ocultar loading
-                document.getElementById('loading').style.display = 'none';
-                
-                // Atualizar interface
-                atualizarInfoMes();
-                exibirAniversariantes();
-                
+                const text = await response.text();
+                return processarCSV(text);
             } catch (error) {
-                console.error('Erro ao carregar dados:', error);
-                mostrarErro(error.message);
+                throw new Error(`Erro ao carregar ${nomeArquivo}: ${error.message}`);
             }
         }
 
-        // Inicialização otimizada para SharePoint
-        function inicializar() {
-            console.log('Sistema de Aniversariantes TCI Web Part iniciado');
-            setTimeout(() => {
-                carregarDados();
-            }, 500);
+        async function carregarDados() {
+            let ultimoErro = null;
+            
+            // Tentar carregar cada arquivo da lista
+            for (const nomeArquivo of nomesPlanilha) {
+                try {
+                    console.log(`Tentando carregar: ${nomeArquivo}`);
+                    dadosCompletos = await carregarArquivo(nomeArquivo);
+                    console.log(`Sucesso ao carregar ${nomeArquivo}:`, dadosCompletos.length, 'registros');
+                    
+                    // Esconder loading e mostrar dados
+                    document.getElementById('loading').style.display = 'none';
+                    atualizarInfoMes();
+                    exibirAniversariantes();
+                    return; // Sucesso, sair da função
+                    
+                } catch (error) {
+                    console.warn(`Falha ao carregar ${nomeArquivo}:`, error.message);
+                    ultimoErro = error;
+                    continue; // Tentar próximo arquivo
+                }
+            }
+            
+            // Se chegou aqui, nenhum arquivo foi carregado com sucesso
+            console.error('Nenhum arquivo de dados pôde ser carregado');
+            mostrarErro(
+                ultimoErro ? 
+                `Não foi possível carregar os dados. Último erro: ${ultimoErro.message}` :
+                'Nenhum arquivo de dados encontrado. Verifique se existe um dos seguintes arquivos: ' + nomesPlanilha.join(', ')
+            );
         }
 
-        // Suporte para diferentes métodos de carregamento
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', inicializar);
-        } else {
-            inicializar();
+        // Função para criar dados de exemplo caso não consiga carregar arquivo
+        function criarDadosExemplo() {
+            const mesAtual = obterMesAtual();
+            
+            return [
+                {
+                    Nome: 'Maria Silva',
+                    Departamento: 'Recursos Humanos',
+                    Cargo: 'Analista de RH',
+                    Data: `15/${mesAtual}/1990`,
+                    Foto: ''
+                },
+                {
+                    Nome: 'João Santos',
+                    Departamento: 'Tecnologia e Comunicação',
+                    Cargo: 'Desenvolvedor',
+                    Data: `22/${mesAtual}/1985`,
+                    Foto: ''
+                },
+                {
+                    Nome: 'Ana Costa',
+                    Departamento: 'Financeiro',
+                    Cargo: 'Analista Financeiro',
+                    Data: `08/${mesAtual}/1992`,
+                    Foto: ''
+                }
+            ];
         }
 
-        // Fallback para SharePoint
-        setTimeout(inicializar, 1000);
+        async function carregarDadosComFallback() {
+            try {
+                await carregarDados();
+            } catch (error) {
+                console.warn('Carregando dados de exemplo devido ao erro:', error);
+                
+                // Usar dados de exemplo
+                dadosCompletos = criarDadosExemplo();
+                
+                // Esconder loading e mostrar dados
+                document.getElementById('loading').style.display = 'none';
+                atualizarInfoMes();
+                exibirAniversariantes();
+                
+                // Mostrar aviso sobre dados de exemplo
+                const avisoExemplo = document.createElement('div');
+                avisoExemplo.className = 'error';
+                avisoExemplo.style.background = 'linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05))';
+                avisoExemplo.style.borderColor = 'rgba(255, 193, 7, 0.3)';
+                avisoExemplo.style.color = '#856404';
+                avisoExemplo.innerHTML = `
+                    <h3>⚠️ Dados de Exemplo</h3>
+                    <p>Não foi possível carregar o arquivo de dados. Exibindo dados de exemplo.</p>
+                `;
+                
+                const monthInfo = document.getElementById('month-info');
+                monthInfo.parentNode.insertBefore(avisoExemplo, monthInfo.nextSibling);
+            }
+        }
+
+        // Função para redirecionar para a página de todos os aniversariantes
+        function redirecionarParaTodosAniversariantes() {
+            // Verificar se o arquivo todos-aniversariantes.html existe
+            const urlDestino = 'todos_aniversariantes.html';
+            
+            // Salvar dados no sessionStorage para a próxima página (se disponível)
+            try {
+                if (typeof(Storage) !== "undefined" && dadosCompletos.length > 0) {
+                    sessionStorage.setItem('dadosAniversariantes', JSON.stringify(dadosCompletos));
+                }
+            } catch (e) {
+                console.warn('SessionStorage não disponível:', e);
+            }
+            
+            // Tentar abrir a nova página
+            try {
+                window.open(urlDestino, '_blank');
+            } catch (error) {
+                // Fallback: redirecionar na mesma aba
+                window.location.href = urlDestino;
+            }
+        }
+
+        // Função para lidar com erros de carregamento de imagem
+        function handleImageError(img) {
+            img.style.display = 'none';
+            const placeholder = img.nextElementSibling;
+            if (placeholder && placeholder.classList.contains('foto-placeholder')) {
+                placeholder.style.display = 'flex';
+            }
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Página carregada, iniciando carregamento de dados...');
+            carregarDadosComFallback();
+        });
+
+        // Atualizar informações do mês imediatamente
+        atualizarInfoMes();
     </script>
 </body>
 </html>
